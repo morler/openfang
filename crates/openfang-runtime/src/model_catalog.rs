@@ -2287,6 +2287,20 @@ fn builtin_models() -> Vec<ModelCatalogEntry> {
             aliases: vec![],
         },
         ModelCatalogEntry {
+            id: "MiniMax-M2.5-highspeed".into(),
+            display_name: "MiniMax M2.5-Highspeed".into(),
+            provider: "minimax".into(),
+            tier: ModelTier::Smart,
+            context_window: 2_000_000,
+            max_output_tokens: 64_000,
+            input_cost_per_m: 1.00,
+            output_cost_per_m: 3.00,
+            supports_tools: true,
+            supports_vision: false,
+            supports_streaming: true,
+            aliases: vec![],
+        },
+        ModelCatalogEntry {
             id: "abab6.5-chat".into(),
             display_name: "ABAB 6.5 Chat".into(),
             provider: "minimax".into(),
@@ -2632,10 +2646,7 @@ mod tests {
     #[test]
     fn test_resolve_alias() {
         let catalog = ModelCatalog::new();
-        assert_eq!(
-            catalog.resolve_alias("sonnet"),
-            Some("claude-sonnet-4-6")
-        );
+        assert_eq!(catalog.resolve_alias("sonnet"), Some("claude-sonnet-4-6"));
         assert_eq!(
             catalog.resolve_alias("haiku"),
             Some("claude-haiku-4-5-20251001")
